@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Actions\CreateOrder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -17,8 +18,8 @@ class ProcessProductionOrder implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(CreateOrder $createOrder): void
     {
-        dd($this->order);
+        $createOrder->handle($this->order);
     }
 }
