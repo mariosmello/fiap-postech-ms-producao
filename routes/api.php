@@ -1,12 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InvoiceController;
-use \App\Http\Controllers\Webhook\MlPixController;
+use App\Http\Controllers\OrderController;
 
 Route::middleware(\App\Http\Middleware\EnsureTokenIsValid::class)->group(function () {
-    Route::apiResource('invoices', InvoiceController::class);
+    Route::apiResource('orders', OrderController::class);
 });
-
-Route::post('webhook/ml/pix', [MlPixController::class, 'update']);

@@ -6,7 +6,7 @@ namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 
-class Customer extends Model
+class Product extends Model
 {
     protected $fillable = ['id', 'name'];
 
