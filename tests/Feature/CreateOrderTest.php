@@ -25,4 +25,6 @@ it('can create a order', function () {
     $createOrder = new \App\Actions\CreateOrder();
     $createOrder->handle($data);
 
+    $this->assertEquals(1, \App\Models\Order::all()->count());
+
 });
