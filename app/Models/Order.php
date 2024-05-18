@@ -16,9 +16,4 @@ class Order extends Model
 
     protected $fillable = ['code', 'products', 'status'];
 
-    public function products(): EmbedsMany
-    {
-        return $this->embedsMany(Product::class);
-    }
-
 }

@@ -16,3 +16,17 @@ it('can list orders', function () {
         ['Authorization' => 'Bearer ' . $this->token]
     )->assertStatus(200);
 });
+
+
+it('can update an order', function () {
+
+    \Illuminate\Support\Facades\Queue::fake();
+
+    $order = \App\Models\Order::create(['status' => 'pending']);
+
+    $this->putJson(
+        route('orders.update', ['order' => $order->getIdAttribute()]),
+        ['status' => 'ready'],
+        ['Authorization' => 'Bearer ' . $this->token]
+    )->assertStatus(200);
+});

@@ -15,6 +15,10 @@ class ProcessProductionOrder implements ShouldQueue
 
     protected $order;
 
+    public function __construct($order) {
+        $this->order = $order;
+    }
+
     /**
      * Execute the job.
      */
