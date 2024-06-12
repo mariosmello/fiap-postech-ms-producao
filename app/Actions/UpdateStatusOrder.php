@@ -11,7 +11,7 @@ class UpdateStatusOrder
         $order->status = $status;
         $order->save();
 
-        ProcessProductionOrderStatus::dispatch($order)->delay(2)->onQueue('productions');
+        ProcessProductionOrderStatus::dispatch($order)->delay(10)->onQueue('productions');
 
         return $order;
     }
