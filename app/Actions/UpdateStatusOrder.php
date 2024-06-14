@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Jobs\ProcessProductionOrderStatus;
+use App\Jobs\OrderPrepared;
 
 class UpdateStatusOrder
 {
@@ -11,7 +11,7 @@ class UpdateStatusOrder
         $order->status = $status;
         $order->save();
 
-        ProcessProductionOrderStatus::dispatch($order)->delay(10)->onQueue('productions');
+        OrderPrepared::dispatch($order)->delay(5)->onQueue('order_updates');
 
         return $order;
     }
