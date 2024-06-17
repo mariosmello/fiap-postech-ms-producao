@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Jobs\OrderPreparationFailed;
 use App\Models\Order;
 
 
@@ -26,6 +27,12 @@ class CreateOrder
 
         $pOrder->products = $products;
         $pOrder->save();
+
+        if (count($products) > 3) {
+            $pOrder->status = 'cancelled';
+            $pOrder->save();
+            OrderPreparationFailed::dispatch($pOrder)->delay(5)->onQueue('order_updates');
+        }
 
     }
 

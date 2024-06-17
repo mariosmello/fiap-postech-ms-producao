@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Jobs\OrderPreparationFailed;
 use App\Jobs\OrderPrepared;
 
 class UpdateStatusOrder
@@ -11,7 +12,11 @@ class UpdateStatusOrder
         $order->status = $status;
         $order->save();
 
-        OrderPrepared::dispatch($order)->delay(5)->onQueue('order_updates');
+        if ('ready' == $status) {
+            OrderPrepared::dispatch($order)->delay(5)->onQueue('order_updates');
+        } else {
+            OrderPreparationFailed::dispatch($order)->delay(5)->onQueue('order_updates');
+        }
 
         return $order;
     }
