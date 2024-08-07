@@ -6,7 +6,7 @@ it('can update order status', function () {
 
     \Illuminate\Support\Facades\Queue::fake();
 
-    $job = new \App\Jobs\ProcessProductionOrder([
+    $job = new \App\Jobs\OrderPaid([
         'code' => '12345',
         'products' => [
             [
